@@ -1,4 +1,9 @@
 # Databricks notebook source
+# MAGIC %md 
+# MAGIC You may find this series of notebooks at https://github.com/databricks-industry-solutions/survival. For more information about this solution accelerator, visit https://www.databricks.com/solutions/accelerators/survivorship-and-churn.
+
+# COMMAND ----------
+
 # MAGIC %md Our goal over the next few notebooks is to examine how two core Survival Analysis techniques can be applied to better understand patterns around customer attrition in a subscription model.  In this notebook, we will prepare a publicly available dataset for analysis.  This data will then serve as the basis for some exploratory analysis and modeling intended to assist us in understanding and predicting customer churn.
 
 # COMMAND ----------

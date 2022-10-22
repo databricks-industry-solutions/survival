@@ -1,4 +1,9 @@
 # Databricks notebook source
+# MAGIC %md 
+# MAGIC You may find this series of notebooks at https://github.com/databricks-industry-solutions/survival. For more information about this solution accelerator, visit https://www.databricks.com/solutions/accelerators/survivorship-and-churn.
+
+# COMMAND ----------
+
 # MAGIC %md With our subscription data prepared, we can now begin examining patterns of customer attrition observed with the KKBox music service.  In this notebook, we'll get oriented to general patterns of customer dropout in preparation for the more detailed work taking place in the next notebook.
 
 # COMMAND ----------

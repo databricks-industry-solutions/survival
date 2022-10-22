@@ -1,4 +1,9 @@
 # Databricks notebook source
+# MAGIC %md 
+# MAGIC You may find this series of notebooks at https://github.com/databricks-industry-solutions/survival. For more information about this solution accelerator, visit https://www.databricks.com/solutions/accelerators/survivorship-and-churn.
+
+# COMMAND ----------
+
 # MAGIC %md For most organizations, the development, evaluation and interpretation of the Cox PH model is the end goal. The information it provides is incredibly useful in exploring when and why customers are dropping out of a subscription service, helping organizations build better customer acquisition and retention strategies.  Still, they are capable of predicting retention probabilties for specific customers that can be useful in applications such as the calculation of customer lifetime value.  With that in mind, we'll examine how we might leveraging our Cox PH models for survival estimation.
 # MAGIC 
 # MAGIC While many Data Science libraries available in Python make use of a SciKit-Learn API, the [lifelines](https://lifelines.readthedocs.io/en/latest/index.html#) library we are using does not.  While an experimental sklearn_adapter interface is available with the library, it does not yet accept the numpy arrays that are typically produced by the various sklearn transformations, making the bundling of transformation logic with a model difficult.   

@@ -1,4 +1,9 @@
 # Databricks notebook source
+# MAGIC %md 
+# MAGIC You may find this series of notebooks at https://github.com/databricks-industry-solutions/survival. For more information about this solution accelerator, visit https://www.databricks.com/solutions/accelerators/survivorship-and-churn.
+
+# COMMAND ----------
+
 # MAGIC %md In the previous notebook, we saw that there were signifcant differences in the curves when compared across acquisition channel, initial payment method, and initial payment plan days. In this notebook, we'll take a look at how these variables interact to determine the risk that a customer will drop-out during each of the three observed at-risk periods.
 # MAGIC 
 # MAGIC To do this, we'll make use of a [Cox Proportional Hazards model](https://en.wikipedia.org/wiki/Proportional_hazards_model) (again made available through the [lifelines](https://lifelines.readthedocs.io/en/latest/Survival%20Regression.html) library).
