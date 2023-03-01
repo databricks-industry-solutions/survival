@@ -283,7 +283,7 @@ plt.yticks(np.arange(0.0,1.0,0.05))
 plt.xlabel('Timeline (Days)', fontsize='x-large')
 plt.xticks(range(0,800,30))
 
-# calculate the surival rates 
+# calculate the survival rates 
 for name, grouped_pd in payment_methods_pd.groupby('init_payment_method_id'):
     kmf = KaplanMeierFitter(alpha=0.05)
     kmf.fit(
@@ -313,7 +313,7 @@ summary[summary['p']>=0.05]
 
 # MAGIC %md From the Log Rank test results, it would appear that payment methods 22 and 32 are statistically undifferentiated (as are 20 and 40). 
 # MAGIC 
-# MAGIC Next, let's examine the days configured for the payment plan at the initiation of a subscription.  This is an odd attribute of the subscriptions as it could be viewed as either continuous or discrete. Let's treat it as descrete here to see how we might handle it in later analysis.
+# MAGIC Next, let's examine the days configured for the payment plan at the initiation of a subscription.  This is an odd attribute of the subscriptions as it could be viewed as either continuous or discrete. Let's treat it as discrete here to see how we might handle it in later analysis.
 # MAGIC 
 # MAGIC At this point, I assume the pattern for this analysis is familiar:
 
@@ -357,7 +357,7 @@ plt.yticks(np.arange(0.0,1.0,0.05))
 plt.xlabel('Timeline (Days)', fontsize='x-large')
 plt.xticks(range(0,800,30))
 
-# calculate the surival rates 
+# calculate the survival rates 
 for name, grouped_pd in payment_plan_days_pd.groupby('init_payment_plan_days'):
     kmf = KaplanMeierFitter(alpha=0.05)
     kmf.fit(

@@ -4,7 +4,7 @@
 
 # COMMAND ----------
 
-# MAGIC %md In the previous notebook, we saw that there were signifcant differences in the curves when compared across acquisition channel, initial payment method, and initial payment plan days. In this notebook, we'll take a look at how these variables interact to determine the risk that a customer will drop-out during each of the three observed at-risk periods.
+# MAGIC %md In the previous notebook, we saw that there were significant differences in the curves when compared across acquisition channel, initial payment method, and initial payment plan days. In this notebook, we'll take a look at how these variables interact to determine the risk that a customer will drop-out during each of the three observed at-risk periods.
 # MAGIC 
 # MAGIC To do this, we'll make use of a [Cox Proportional Hazards model](https://en.wikipedia.org/wiki/Proportional_hazards_model) (again made available through the [lifelines](https://lifelines.readthedocs.io/en/latest/Survival%20Regression.html) library).
 
@@ -124,7 +124,7 @@ encoded_pd.head()
 # MAGIC %md We now have a bunch of additional features encoding the unique values in our categorical fields. For each categorical field, we typically drop one of the encoded features.  We will do this here, but we want to do so in a manner where we control which of the features is dropped.
 # MAGIC 
 # MAGIC To understand why, consider that the Cox Proportional Hazards model defines a baseline  model that calculates the risk of an event - churn in this case - 
-# MAGIC occuring over time. Each attribute included in the model alters this risk in a fixed (*proportional*) manner.  When we drop one of our one-hot columns, the value that column represents becomes represented in the baseline.  (In the literature, the values represented within the baseline function are sometime referred to as *reference* values.)  
+# MAGIC occurring over time. Each attribute included in the model alters this risk in a fixed (*proportional*) manner.  When we drop one of our one-hot columns, the value that column represents becomes represented in the baseline.  (In the literature, the values represented within the baseline function are sometime referred to as *reference* values.)  
 # MAGIC 
 # MAGIC With this in mind, we could drop an arbitrary combination of encoded features from our model to eliminate the multi-collinearity issue created by one-hot encoding. But if we drop encoded features that align with a *typical* member of our subscriber population, we can create a baseline that's intuitively understood by our business users. For example, if our most popular channel (*registered_via = 7*) and payment method (*init_payment_method_id = 41*) occur frequently in combination with each other, then a subscriber with these three values for these attributes might intuitively be understood as a representative subscriber of the KKBox service.  If we drop the one-hot encoded features corresponding to *registered_via = 7* and *init_payment_method_id = 41*, we have a baseline aligned with our representative subscriber and everything else is a deviation away from this recognized baseline:
 
