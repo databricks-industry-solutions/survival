@@ -84,7 +84,7 @@ transactions = (
     .save('/tmp/kkbox-survival/silver/transactions')
   )
 
-# create table object to make delta lake queriable
+# create table object to make delta lake queryable
 spark.sql('''
   CREATE TABLE kkbox.transactions
   USING DELTA 
@@ -125,7 +125,7 @@ members = (
     .save('/tmp/kkbox-survival/silver/members')
   )
 
-# create table object to make delta lake queriable
+# create table object to make delta lake queryable
 spark.sql('''
   CREATE TABLE kkbox.members 
   USING DELTA 
@@ -177,7 +177,7 @@ spark.sql('''
 
 # COMMAND ----------
 
-# MAGIC %md Examining the more condensed transaction history for this customer, we can see another quirk in the data occurring on Deceber 24, 2015 (*trans_at = 2015-12-24*). On this date, the expiration date on the account is reset to a date that occurs prior to subscription initiation.  The next transaction date, the account is reset to a future date.
+# MAGIC %md Examining the more condensed transaction history for this customer, we can see another quirk in the data occurring on December 24, 2015 (*trans_at = 2015-12-24*). On this date, the expiration date on the account is reset to a date that occurs prior to subscription initiation.  The next transaction date, the account is reset to a future date.
 # MAGIC 
 # MAGIC The backdated record is likely due to some kind of subscription management activity such as a change in auto-renewal status or the like.  Regardless of the reason, it's clear the backdated value should not be considered for churn identification purposes.  Instead, we might simply add logic so that if a backdated expiration date appears in the log, it is reset to the transaction date with which it is associated:
 
@@ -287,7 +287,7 @@ spark.sql('''
 # MAGIC     LAG(expires_at) OVER(PARTITION BY msno ORDER BY trans_at) as previous_expires_at,
 # MAGIC     trans_at,
 # MAGIC     expires_at,
-# MAGIC     CASE   -- idnetify meaningful events that change expiration date
+# MAGIC     CASE   -- identify meaningful events that change expiration date
 # MAGIC       WHEN (LAG(expires_at, 1) OVER(PARTITION BY msno ORDER BY trans_at)) IS NULL THEN 1  -- new customer registration
 # MAGIC       WHEN (LAG(expires_at, 1) OVER(PARTITION BY msno ORDER BY trans_at)) != expires_at THEN 1 -- change in expiration date
 # MAGIC       ELSE 0

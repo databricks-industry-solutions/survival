@@ -4,7 +4,7 @@
 
 # COMMAND ----------
 
-# MAGIC %md For most organizations, the development, evaluation and interpretation of the Cox PH model is the end goal. The information it provides is incredibly useful in exploring when and why customers are dropping out of a subscription service, helping organizations build better customer acquisition and retention strategies.  Still, they are capable of predicting retention probabilties for specific customers that can be useful in applications such as the calculation of customer lifetime value.  With that in mind, we'll examine how we might leveraging our Cox PH models for survival estimation.
+# MAGIC %md For most organizations, the development, evaluation and interpretation of the Cox PH model is the end goal. The information it provides is incredibly useful in exploring when and why customers are dropping out of a subscription service, helping organizations build better customer acquisition and retention strategies.  Still, they are capable of predicting retention probabilities for specific customers that can be useful in applications such as the calculation of customer lifetime value.  With that in mind, we'll examine how we might leveraging our Cox PH models for survival estimation.
 # MAGIC 
 # MAGIC While many Data Science libraries available in Python make use of a SciKit-Learn API, the [lifelines](https://lifelines.readthedocs.io/en/latest/index.html#) library we are using does not.  While an experimental sklearn_adapter interface is available with the library, it does not yet accept the numpy arrays that are typically produced by the various sklearn transformations, making the bundling of transformation logic with a model difficult.   
 # MAGIC 
@@ -120,7 +120,7 @@ method = 28
 plan = 30
 t = 184
 
-# retreieve coefficients
+# retrieve coefficients
 channel_coefficient = get_coefficient('channel_{0}'.format(channel), coefficients)
 method_coefficient = get_coefficient('method_{0}'.format(method), coefficients) 
 
@@ -141,7 +141,7 @@ print('   Partial Hazard:\t\t\t{0:.4f}'.format(partial_hazard))
 # COMMAND ----------
 
 # DBTITLE 1,Use Model to Predict Hazard
-# retreieve encoded value for our selected customer
+# retrieve encoded value for our selected customer
 X = survival_pd[
   (subscriptions_pd['registered_via']==channel) &
   (subscriptions_pd['init_payment_method_id']==method) &
@@ -288,7 +288,7 @@ method = 28
 plan = 30
 t = 184
 
-# retreive feature coefficients
+# retrieve feature coefficients
 channel_coefficient = get_coefficient('channel_{0}'.format(channel), coefficients) 
 method_coefficient = get_coefficient('method_{0}'.format(method), coefficients) 
 
@@ -385,7 +385,7 @@ shutil.rmtree('/dbfs/tmp/kkbox-survival/gold/cumulative_hazard', ignore_errors=T
 # define table for baseline data
 spark.sql('create table kkbox.cumulative_hazard using delta location \'/tmp/kkbox-survival/gold/cumulative_hazard\'')
 
-# retreive stored data
+# retrieve stored data
 display(spark.sql('SELECT * FROM kkbox.cumulative_hazard ORDER BY t'))
 
 # COMMAND ----------
@@ -406,7 +406,7 @@ shutil.rmtree('/dbfs/tmp/kkbox-survival/gold/survival_ratio', ignore_errors=True
 # define table for baseline data
 spark.sql('create table kkbox.survival_ratio using delta location \'/tmp/kkbox-survival/gold/survival_ratio\'')
 
-# retreive stored data
+# retrieve stored data
 display(spark.sql('SELECT * FROM kkbox.survival_ratio ORDER BY t'))
 
 # COMMAND ----------
@@ -427,7 +427,7 @@ shutil.rmtree('/dbfs/tmp/kkbox-survival/gold/coefficients', ignore_errors=True)
 spark.sql('drop table if exists kkbox.coefficients')
 spark.sql('create table kkbox.coefficients using delta location \'/tmp/kkbox-survival/gold/coefficients\'')
 
-# retreive stored data
+# retrieve stored data
 display(spark.table('kkbox.coefficients'))
 
 # COMMAND ----------
